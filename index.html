@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Arboretum of Values</title>
+    <style>
+        :root {
+            --bg-color: #F5F5DC;      /* Warm Beige Background */
+            --card-bg: #E5E5BE;       /* Golden-Olive Card */
+            --text-maroon: #6C0000;   /* Headers */
+            --text-brown: #97703B;    /* Accents */
+            --text-black: #000000;    /* Main Text */
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-black);
+            font-family: 'Georgia', serif;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+
+        header {
+            text-align: center;
+            padding: 100px 20px 60px 20px;
+            background: linear-gradient(to bottom, #ede9d5, var(--bg-color));
+            border-bottom: 3px double var(--text-maroon);
+        }
+
+        h1 { font-size: 3.5rem; color: var(--text-maroon); text-transform: uppercase; letter-spacing: 4px; margin-bottom: 10px; }
+        .subheader { font-style: italic; font-size: 1.2rem; color: var(--text-brown); max-width: 700px; margin: 0 auto; margin-bottom: 10px; }
+
+        /* --- NEW STYLES FOR INTRO SECTIONS --- */
+        .intro-container {
+            max-width: 1100px;
+            margin: 0 auto 60px auto;
+            padding: 60px 20px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            border-bottom: 1px solid rgba(151, 112, 59, 0.3);
+        }
+
+        .intro-section h2 {
+            color: var(--text-maroon);
+            text-transform: uppercase;
+            font-size: 1.6rem;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+            border-left: 4px solid var(--text-maroon);
+            padding-left: 15px;
+        }
+
+        .intro-section p {
+            font-size: 1.1rem;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .why-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .why-list li {
+            margin-bottom: 18px;
+            padding-left: 20px;
+            border-left: 2px solid var(--text-brown);
+        }
+
+        .why-list b {
+            display: block;
+            color: var(--text-maroon);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .challenge-quote {
+            font-style: italic;
+            color: var(--text-brown);
+            margin-top: 30px;
+            padding: 20px;
+            border: 1px dashed var(--text-brown);
+            text-align: center;
+            background-color: rgba(229, 229, 190, 0.2);
+        }
+
+        /* --- CONTACT SECTION STYLE --- */
+        .contact-curator {
+            max-width: 600px;
+            margin: 80px auto 20px auto;
+            text-align: center;
+            padding: 50px 20px;
+            border: 1px solid var(--text-brown);
+            background-color: rgba(229, 229, 190, 0.3);
+        }
+
+        .contact-curator h3 {
+            color: var(--text-maroon);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+        }
+
+        .contact-link { 
+            color: var(--text-maroon); 
+            text-decoration: none; 
+            font-weight: bold; 
+            font-size: 1.2rem;
+            border-bottom: 1px solid var(--text-maroon);
+            transition: all 0.3s ease;
+        }
+
+        .contact-link:hover {
+            color: var(--text-brown);
+            border-color: var(--text-brown);
+        }
+
+        /* --- EXISTING STYLES --- */
+        .category-label {
+            grid-column: 1 / -1;
+            font-size: 2rem;
+            color: var(--text-maroon);
+            border-bottom: 1px solid var(--text-brown);
+            margin: 60px 0 20px 0;
+            padding-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        .museum-floor {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+            gap: 80px;
+        }
+
+        .room {
+            position: relative;
+            width: 100%;
+            height: 800px; 
+            background: var(--card-bg);
+            border-radius: 4px;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(108, 0, 0, 0.08);
+            border: 1px solid var(--text-brown);
+        }
+
+        .hook-image { width: 100%; height: 100%; object-fit: cover; transition: opacity 0.8s ease; }
+
+        .insight-overlay {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            display: flex; flex-direction: column; padding: 45px; box-sizing: border-box;
+            opacity: 0; transition: opacity 0.6s ease;
+            background-color: var(--card-bg); overflow-y: auto;
+        }
+
+        .room:hover .hook-image { opacity: 0.05; }
+        .room:hover .insight-overlay { opacity: 1; }
+
+        .why-section { font-size: 1.3rem; border-left: 5px solid var(--text-maroon); padding-left: 20px; margin-bottom: 25px; color: var(--text-maroon); font-weight: bold; }
+        .breakdown-list { margin-bottom: 25px; font-size: 1rem; }
+        .breakdown-list b { color: var(--text-brown); text-transform: uppercase; font-size: 0.85rem; }
+        .takeaway-box { background: rgba(108, 0, 0, 0.05); padding: 20px; border: 1px dashed var(--text-maroon); margin-top: auto; }
+        .takeaway-box strong { color: var(--text-maroon); }
+
+        footer { text-align: center; padding: 100px 20px; color: var(--text-brown); border-top: 1px solid rgba(151, 112, 59, 0.2); }
+
+        /* Responsive Mobile Styles */
+        @media (max-width: 900px) {
+            .intro-container { grid-template-columns: 1fr; gap: 40px; }
+            .museum-floor { grid-template-columns: 1fr; }
+            .room { height: 700px; }
+            h1 { font-size: 2.2rem; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="master-key">
+        <img src="MasterKey.png" alt="The Master Key of the Arboretum" style="width: 100%; max-width: 600px; height: auto; border-radius: 4px; border: 1px solid var(--text-brown); margin-bottom: 20px;">
+        <h1>Visualizing the Architecture of Human Progress</h1>
+        <p class="subheader">"A curated space to decode the principles of nature and growth through visual contemplation."</p>
+        <p class="subheader">Begin your journey from the roots of Knowledge to the stars of Legacy.</p>
+    </div>
+</header>
+
+<div class="intro-container">
+    <section class="intro-section">
+        <h2>About the Archive</h2>
+        <p>This space is a curated exploration of the invisible forces that shape our world. Through a series of concept visuals, we map the intersections of <b>Knowledge, Innovation, Civilization, Culture, and Legacy.</b></p>
+        <p>We believe that the story of humanity isn't just found in history books, but in the evolution of our ideas. This site serves as a visual bridge between where we have been and where we are going.</p>
+    </section>
+
+    <section class="intro-section">
+        <h2>Why This Space?</h2>
+        <p>In a world of endless scrolling, we often look without truly seeing. This space is a <b>workout for your perception</b>—designed to help you slow down and decode the world.</p>
+        
+        <ul class="why-list">
+            <li><b>Trigger Curiosity:</b> To wonder how a single innovation can pivot the course of an entire civilization.</li>
+            <li><b>Build Perception:</b> To help you spot the patterns in culture and legacy that most people miss.</li>
+            <li><b>Find the Takeaway:</b> To challenge you to walk away with a new mental model for how the world works.</li>
+        </ul>
+
+        <div class="challenge-quote">
+            "Don't just browse. Ask yourself: What is the core idea here? How does this change the way I see tomorrow?"
+        </div>
+    </section>
+</div>
+
+<div class="museum-floor">
+
+    <div class="category-label">Knowledge</div>
+
+    <div class="room">
+        <img src="Silent Libraries.png" class="hook-image">
+        <div class="insight-overlay">
+            <div class="why-section">The "Why": Knowledge is not static; it is a flowing energy that must move beyond the shelf to be useful.</div>
+            <div class="breakdown-list"><strong>Anatomy:</strong><ul><li><b>The Streams:</b> Symbols of active learning.</li><li><b>Dissolving Shelves:</b> Breaking the limits of formal schooling.</li></ul></div>
+            <div class="takeaway-box"><strong>THE KEY:</strong> Don't just collect information; let it flow into your actions.</div>
+        </div>
+    </div>
+
+    <div class="room">
+        <img src="Living Equations.png" class="hook-image">
+        <div class="insight-overlay">
+            <div class="why-section">The "Why": Logic and life are not separate; nature grows through mathematical precision.</div>
+            <div class="breakdown-list"><strong>Anatomy:</strong><ul><li><b>Organic Sprouts:</b> Life emerging from theory.</li><li><b>Symbols:</b> The underlying logic of the universe.</li></ul></div>
+            <div class="takeaway-box"><strong>THE KEY:</strong> Use logic as a seed for your creativity, not a cage for it.</div>
+        </div>
+    </div>
+
+    <div class="room">
+        <img src="Wisdom in Shadows.png" class="hook-image">
+        <div class="insight-overlay">
+            <div class="why-section">The "Why": We are part of a long chain of thought; our insights are echoes of those before us.</div>
+            <div class="breakdown-list"><strong>Anatomy:</strong><ul><li><b>Cave Walls:</b> The foundation of early human consciousness.</li><li><b>Silhouettes:</b> The presence of ancestors in our modern ideas.</li></ul></div>
+            <div class="takeaway-box"><strong>THE KEY:</strong> Respect the foundations; your modern "new" idea likely has ancient roots.</div>
+        </div>
+    </div>
+
+    <div class="room">
+        <img src="Unwritten Scrolls.png" class="hook-image">
+        <div class="insight-overlay">
+            <div class="why-section">The "Why": The most valuable knowledge is often what hasn't been discovered yet.</div>
+            <div class="breakdown-list"><strong>Anatomy:</strong><ul><li><b>Blank Parchment:</b> The purity of potential.</li><li><b>The Glow:</b> The light of future innovation.</li></ul></div>
+            <div class="takeaway-box"><strong>THE KEY:</strong> Stay curious about the "blank spaces" in your field; that is where you will lead.</div>
+        </div>
+    </div>
+
+    <div class="category-label">Innovations</div>
+
+    <div class="room">
+        <img src="Fractal Futures.png" class="hook-image">
+        <div class="insight-overlay">
+            <div class="why-section">The "Why": Technology reaches its highest potential when it mimics the efficiency of nature.</div>
+            <div class="breakdown-list"><strong>Anatomy:</strong><ul><li><b>Circuits:</b> High-speed human ingenuity.</li><li><b>Leaf Veins:</b> Nature’s perfect distribution system.</li></ul></div>
+            <div class="takeaway-box"><strong>THE KEY:</strong> Look to nature to solve your most complex technical problems.</div>
+        </div>
+    </div>
+
+    <div class="room">
+        <img src="Invisible Engines.png" class="hook-image">
+        <div class="insight-overlay">
+            <div class="why-section">The "Why": The true power behind progress is often the things we cannot see.</div>
+            <div class="breakdown-list"><strong>Anatomy:</strong><ul><li><b>Light Gears:</b> Frictionless, pure energy.</li><li><b>Unseen Forces:</b> Motivation, vision, and belief.</li></ul></div>
+            <div class="takeaway-box"><strong>THE KEY:</strong> Focus on the "inner engines"—your mindset and values—to drive your visible career.</div>
+        </div>
+    </div>
+
+    <div class="room">
+        <img src="Quantum Bridges.png" class="hook-image">
+        <div class="insight-overlay">
+            <div class="why-section">The "Why": Innovation is the bridge that turns a dream into a physical reality.</div>
+            <div class="breakdown-list"><strong>Anatomy:</strong><ul><li><b>Particles:</b> The raw material of imagination.</li><li><b>Pathway:</b> A structured way to reach the impossible.</li></ul></div>
+            <div class="takeaway-box"><strong>THE KEY:</strong> Every great reality began as a "particle" of imagination. Bridge the gap.</div>
+        </div>
+    </div>
+
+    <div class="room">
+        <img src="Adaptive Skins.png" class="hook-image">
+        <div class="insight-overlay">
+            <div class="why-section">The "Why": Resilience comes from the ability to transform and shift with the environment.</div>
+            <div class="breakdown-list"><strong>Anatomy:</strong><ul><li><b>Surfaces:</b> Our external skills and presentation.</li><li><b>Chameleons:</b> The ultimate masters of situational adaptation.</li></ul></div>
+            <div class="takeaway-box"><strong>THE KEY:</strong> Don't be rigid. Those who survive and thrive are those who can adapt.</div>
+        </div>
+    </div>
+
+    <div class="category-label">Civilisation</div>
+
+    <div class="room">
+        <img src="Echoing Towers.png" class="hook-image">
+        <div class="insight-overlay">
+            <div class="why-section">The "Why": Modern ambition is built directly upon the pillars of our ancestors.</div>
+            <div class="breakdown-list"><strong>Anatomy:</strong><ul><li><b>Skyscrapers:</b> Modern heights of achievement.</li><li><b>Stone Pillars:</b> Ancient stability and continuity.</li></ul></div>
+            <div class="takeaway-box"><strong>THE KEY:</strong> To build high, you must first understand the depth of your foundation.</div>
+        </div>
+    </div>
+
+    <div class="room">
+        <img src="Silent Agora.png" class="hook-image">
+        <div class="insight-overlay">
+            <div class="why-section">The "Why": A space of shared dialogue remains active even when no one is speaking.</div>
+            <div class="breakdown-list"><strong>Anatomy:</strong><ul><li><b>Plazas:</b> The heart of community.</li><li><b>Footprints:</b> The lingering energy of collaboration.</li></ul></div>
+            <div class="takeaway-box"><strong>THE KEY:</strong> The work you do in a group leaves a "footprint" that others can follow.</div>
+        </div>
+    </div>
+
+    <div class="room">
+        <img src="River Cities.png" class="hook-image">
+        <div class="insight-overlay">
+            <div class="why-section">The "Why": Great societies flow around obstacles rather than crashing into them.</div>
+            <div class="breakdown-list"><strong>Anatomy:</strong><ul><li><b>Flowing Water:</b> Adaptability and grace.</li><li><b>Settlements:</b> Fixed goals that stay fluid in form.</li></ul></div>
+            <div class="takeaway-box"><strong>THE KEY:</strong> Be fluid in your methods, but stay focused on your destination.</div>
+        </div>
+    </div>
+
+    <div class="room">
+        <img src="Threshold Arches.png" class="hook-image">
+        <div class="insight-overlay">
+            <div class="why-section">The "Why": Civilisation is not a destination, but a series of passages toward new horizons.</div>
+            <div class="breakdown-list"><strong>Anatomy:</strong><ul><li><b>Gateways:</b> Points of transition.</li><li><b>Horizons:</b> Multiple future possibilities.</li></ul></div>
+            <div class="takeaway-box"><strong>THE KEY:</strong> Every success is just a threshold to the next great challenge.</div>
+        </div>
+    </div>
+
+    <div class="category-label">Culture</div>
+
+    <div class="room">
+        <img src="Threads of Song.png" class="hook-image">
+        <div class="insight-overlay">
+            <div class="why-section">The "Why": Culture is the fabric that binds us, woven together by the music of our stories.</div>
+            <div class="breakdown-list"><strong>Anatomy:</strong><ul><li><b>Woven Fabrics:</b> The interconnectedness of people.</li><li><b>Melodies:</b> The harmony found in diversity.</li></ul></div>
+            <div class="takeaway-box"><strong>THE KEY:</strong> Contribute your unique "thread" to the culture around you.</div>
+        </div>
+    </div>
+
+    <div class="room">
+        <img src="Masks of Memory.png" class="hook-image">
+        <div class="insight-overlay">
+            <div class="why-section">The "Why": We wear the stories of our past to face the challenges of our future.</div>
+            <div class="breakdown-list"><strong>Anatomy:</strong><ul><li><b>Ceremonial Masks:</b> Personas of strength.</li><li><b>Glowing Stories:</b> Wisdom that lights up the dark.</li></ul></div>
+            <div class="takeaway-box"><strong>THE KEY:</strong> Your family and cultural history is a source of power, not a weight.</div>
+        </div>
+    </div>
+
+    <div class="room">
+        <img src="Dance of Symbols.png" class="hook-image">
+        <div class="insight-overlay">
+            <div class="why-section">The "Why": Language is a living movement, shifting as we communicate.</div>
+            <div class="breakdown-list"><strong>Anatomy:</strong><ul><li><b>Alphabets:</b> The building blocks of thought.</li><li><b>Choreography:</b> The beauty of organized expression.</li></ul></div>
+            <div class="takeaway-box"><strong>THE KEY:</strong> Mastery of communication is the ultimate "dance" in professional life.</div>
+        </div>
+    </div>
+
+    <div class="room">
+        <img src="Sacred Fires.png" class="hook-image">
+        <div class="insight-overlay">
+            <div class="why-section">The "Why": Rituals provide the energy that keeps a culture alive through the seasons.</div>
+            <div class="breakdown-list"><strong>Anatomy:</strong><ul><li><b>Bonfires:</b> The warmth of community.</li><li><b>Patterns:</b> The energy of consistent habits.</li></ul></div>
+            <div class="takeaway-box"><strong>THE KEY:</strong> Small, sacred habits generate the energy needed for long-term growth.</div>
+        </div>
+    </div>
+
+    <div class="category-label">Legacy</div>
+
+    <div class="room">
+        <img src="Time Gardens.png" class="hook-image">
+        <div class="insight-overlay">
+            <div class="why-section">The "Why": A legacy is not built instantly; it is cultivated flower by flower.</div>
+            <div class="breakdown-list"><strong>Anatomy:</strong><ul><li><b>Hourglasses:</b> The finite nature of our time.</li><li><b>Blooming Flowers:</b> The beauty we leave behind.</li></ul></div>
+            <div class="takeaway-box"><strong>THE KEY:</strong> Plant the seeds of your legacy today, even if you won't see them bloom for years.</div>
+        </div>
+    </div>
+
+    <div class="room">
+        <img src="Stone Whispers.png" class="hook-image">
+        <div class="insight-overlay">
+            <div class="why-section">The "Why": Even when our monuments fall, our impact remains in the sand.</div>
+            <div class="breakdown-list"><strong>Anatomy:</strong><ul><li><b>Monuments:</b> Our attempt at permanent fame.</li><li><b>Fragments:</b> The quiet truth that small acts last longest.</li></ul></div>
+            <div class="takeaway-box"><strong>THE KEY:</strong> Don't worry about being famous; worry about being useful in small, lasting ways.</div>
+        </div>
+    </div>
+
+    <div class="room">
+        <img src="Unseen Heirlooms.png" class="hook-image">
+        <div class="insight-overlay">
+            <div class="why-section">The "Why": The most valuable things we leave behind are the values we pass to the next generation.</div>
+            <div class="breakdown-list"><strong>Anatomy:</strong><ul><li><b>Invisible Threads:</b> The bonds of mentorship and love.</li><li><b>Generations:</b> The bridge between past and future.</li></ul></div>
+            <div class="takeaway-box"><strong>THE KEY:</strong> Your greatest legacy is the person you help someone else become.</div>
+        </div>
+    </div>
+
+    <div class="room">
+        <img src="Celestial Seeds.png" class="hook-image">
+        <div class="insight-overlay">
+            <div class="why-section">The "Why": Our final legacy is realizing we are part of a cosmic journey far larger than ourselves.</div>
+            <div class="breakdown-list"><strong>Anatomy:</strong><ul><li><b>Stars:</b> High, aspirational potential.</li><li><b>Soil:</b> The humble work of daily life.</li></ul></div>
+            <div class="takeaway-box"><strong>THE KEY:</strong> Aim for the stars, but keep your hands in the soil. You are both cosmic and earthbound.</div>
+        </div>
+    </div>
+
+</div>
+
+<div class="contact-curator">
+    <h3>Contact the Curator</h3>
+    <p>Have a reflection to share or a question about these value themes?</p>
+    <a href="mailto:curator@arboretumofvalues.com" class="contact-link">curator@arboretumofvalues.com</a>
+</div>
+
+<footer>
+    &copy; 2026 The Values Inside the Visuals | Curated for Curious Future Leaders
+</footer>
+
+</body>
+</html>
