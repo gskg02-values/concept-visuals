@@ -1,5 +1,7 @@
 The Values Inside A Visual
+
 Visualizing the Architecture of Human Progress
+
 This space is a minimalist digital sanctuary designed to trigger curiosity and build perception in young readers. In an era of rapid information consumption, this project serves as a "quiet museum"— a space to slow down and decode the underlying principles that shape our world.
 
 🏛️ The Vision
